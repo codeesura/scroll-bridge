@@ -14,6 +14,8 @@ async function main() {
         const bridgeFeeWei = ethers.utils.parseEther("0.000084");
         const sendableAmountWei = currentBalanceEth.sub(minimumEthToKeep).sub(bridgeFeeWei);
 
+        /* This line of code is calling the `estimateGasCost` function on the `contractHelper` object. This
+        function is responsible for estimating the gas cost and gas limit for a transaction. */
         const { estimatedGasCostEth , gasLimit } = await contractHelper.estimateGasCost(ethers.utils.formatEther(sendableAmountWei), GAS_PRICE_GWEI);
 
         const sendableAmountEth = ethers.utils.formatEther(
@@ -23,6 +25,9 @@ async function main() {
             .sub(minimumEthToKeep)
         );
 
+        /* The line `await contractHelper.depositToBridge(sendableAmountEth, gasLimit, GAS_PRICE_GWEI);` is
+        calling a function `depositToBridge` on the `contractHelper` object. This function is responsible
+        for depositing a certain amount of ETH to a bridge. */
         await contractHelper.depositToBridge(sendableAmountEth, gasLimit, GAS_PRICE_GWEI);
 
         console.log(`Successfully deposited ${sendableAmountEth} ETH to the bridge!`);

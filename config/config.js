@@ -2,6 +2,8 @@ require('dotenv').config();
 const BRIDGE_ABI = require('../abis/BridgeABI.json');
 const UNISWAP_POOL_ABI = require('../abis/PoolABI.json');
 
+/* The code `module.exports` is used in Node.js to export an object or a function from a module. In
+this case, it is exporting an object that contains various configuration values. */
 module.exports = {
     BRIDGE_CONTRACT_ABI: BRIDGE_ABI,
     BRIDGE_CONTRACT_ADDRESS: "0xF8B1378579659D8F7EE5f3C929c2f3E332E41Fd6",
