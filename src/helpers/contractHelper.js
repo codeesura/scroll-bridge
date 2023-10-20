@@ -44,10 +44,10 @@ class ContractHelper {
         const gasEstimate = await this.contract.estimateGas["depositETH(uint256,uint256)"](depositAmount, l2GasLimit, { value: totalValue });
         const gasCostWei = gasEstimate.mul(ethers.utils.parseUnits(gasPriceGwei, 'gwei'));
 
-        return ethers.utils.formatEther(gasCostWei);
+        return { estimatedGasCostEth: ethers.utils.formatEther(gasCostWei), gasLimit: gasEstimate };
     }
 
-    async depositToBridge(amountEth) {
+    async depositToBridge(amountEth, gasLimit, gasPrice) {
         const l2GasLimit = 168000;
         const depositAmount = ethers.utils.parseEther(amountEth);
         // Additional gas cost in ETH, converted to Wei
@@ -55,7 +55,7 @@ class ContractHelper {
         const totalValue = depositAmount.add(addedValue);
 
         try {
-            const txResponse = await this.contract.depositETH(depositAmount, l2GasLimit, { value: totalValue });
+            const txResponse = await this.contract["depositETH(uint256,uint256)"](depositAmount, l2GasLimit, { value: totalValue, gasLimit: gasLimit, gasPrice: ethers.utils.parseUnits(gasPrice, 'gwei')});
             return await txResponse.wait();
         } catch (error) {
             console.error("Error during deposit to the bridge:", error);

@@ -13,7 +13,8 @@ async function main() {
 
         const bridgeFeeWei = ethers.utils.parseEther("0.000084");
         const sendableAmountWei = currentBalanceEth.sub(minimumEthToKeep).sub(bridgeFeeWei);
-        const estimatedGasCostEth = await contractHelper.estimateGasCost(ethers.utils.formatEther(sendableAmountWei), GAS_PRICE_GWEI);
+
+        const { estimatedGasCostEth , gasLimit } = await contractHelper.estimateGasCost(ethers.utils.formatEther(sendableAmountWei), GAS_PRICE_GWEI);
 
         const sendableAmountEth = ethers.utils.formatEther(
             currentBalanceEth
@@ -22,7 +23,7 @@ async function main() {
             .sub(minimumEthToKeep)
         );
 
-        await contractHelper.depositToBridge(sendableAmountEth);
+        await contractHelper.depositToBridge(sendableAmountEth, gasLimit, GAS_PRICE_GWEI);
 
         console.log(`Successfully deposited ${sendableAmountEth} ETH to the bridge!`);
     } catch (error) {
