@@ -1,511 +1,133 @@
-[
-  { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "l1Token",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "l2Token",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "from",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
-      }
-    ],
-    "name": "DepositERC20",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "from",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
-      }
-    ],
-    "name": "DepositETH",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "l1Token",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "l2Token",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "from",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
-      }
-    ],
-    "name": "FinalizeWithdrawERC20",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "from",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
-      }
-    ],
-    "name": "FinalizeWithdrawETH",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint8",
-        "name": "version",
-        "type": "uint8"
-      }
-    ],
-    "name": "Initialized",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "previousOwner",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
-    ],
-    "name": "OwnershipTransferred",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "recipient",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "RefundERC20",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "recipient",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "RefundETH",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "oldDefaultERC20Gateway",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "newDefaultERC20Gateway",
-        "type": "address"
-      }
-    ],
-    "name": "SetDefaultERC20Gateway",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "oldGateway",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "newGateway",
-        "type": "address"
-      }
-    ],
-    "name": "SetERC20Gateway",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "oldETHGateway",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "newEthGateway",
-        "type": "address"
-      }
-    ],
-    "name": "SetETHGateway",
-    "type": "event"
-  },
-  {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "ERC20Gateway",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "defaultERC20Gateway",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_token", "type": "address" },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
-      { "internalType": "uint256", "name": "_gasLimit", "type": "uint256" }
-    ],
-    "name": "depositERC20",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_token", "type": "address" },
-      { "internalType": "address", "name": "_to", "type": "address" },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
-      { "internalType": "uint256", "name": "_gasLimit", "type": "uint256" }
-    ],
-    "name": "depositERC20",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_token", "type": "address" },
-      { "internalType": "address", "name": "_to", "type": "address" },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
-      { "internalType": "bytes", "name": "_data", "type": "bytes" },
-      { "internalType": "uint256", "name": "_gasLimit", "type": "uint256" }
-    ],
-    "name": "depositERC20AndCall",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
-      { "internalType": "uint256", "name": "_gasLimit", "type": "uint256" }
-    ],
-    "name": "depositETH",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_to", "type": "address" },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
-      { "internalType": "uint256", "name": "_gasLimit", "type": "uint256" }
-    ],
-    "name": "depositETH",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_to", "type": "address" },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
-      { "internalType": "bytes", "name": "_data", "type": "bytes" },
-      { "internalType": "uint256", "name": "_gasLimit", "type": "uint256" }
-    ],
-    "name": "depositETHAndCall",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "ethGateway",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "", "type": "address" },
-      { "internalType": "address", "name": "", "type": "address" },
-      { "internalType": "address", "name": "", "type": "address" },
-      { "internalType": "address", "name": "", "type": "address" },
-      { "internalType": "uint256", "name": "", "type": "uint256" },
-      { "internalType": "bytes", "name": "", "type": "bytes" }
-    ],
-    "name": "finalizeWithdrawERC20",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "", "type": "address" },
-      { "internalType": "address", "name": "", "type": "address" },
-      { "internalType": "uint256", "name": "", "type": "uint256" },
-      { "internalType": "bytes", "name": "", "type": "bytes" }
-    ],
-    "name": "finalizeWithdrawETH",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "gatewayInContext",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_token", "type": "address" }
-    ],
-    "name": "getERC20Gateway",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_l1Address", "type": "address" }
-    ],
-    "name": "getL2ERC20Address",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_ethGateway", "type": "address" },
-      {
-        "internalType": "address",
-        "name": "_defaultERC20Gateway",
-        "type": "address"
-      }
-    ],
-    "name": "initialize",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "owner",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "renounceOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_sender", "type": "address" },
-      { "internalType": "address", "name": "_token", "type": "address" },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
-    ],
-    "name": "requestERC20",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_newDefaultERC20Gateway",
-        "type": "address"
-      }
-    ],
-    "name": "setDefaultERC20Gateway",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address[]", "name": "_tokens", "type": "address[]" },
-      { "internalType": "address[]", "name": "_gateways", "type": "address[]" }
-    ],
-    "name": "setERC20Gateway",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_newEthGateway", "type": "address" }
-    ],
-    "name": "setETHGateway",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "newOwner", "type": "address" }
-    ],
-    "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
-]
+pragma solidity ^0.8.0;
+
+contract MyContract {
+    // Constructor
+    constructor() {}
+
+    // Events
+
+    // Event for depositing ERC20 tokens
+    event DepositERC20(
+        address indexed l1Token,
+        address indexed l2Token,
+        address indexed from,
+        address to,
+        uint256 amount,
+        bytes data
+    );
+
+    // Event for depositing Ether
+    event DepositETH(
+        address indexed from,
+        address indexed to,
+        uint256 amount,
+        bytes data
+    );
+
+    // Event for finalizing withdrawal of ERC20 tokens
+    event FinalizeWithdrawERC20(
+        address indexed l1Token,
+        address indexed l2Token,
+        address indexed from,
+        address to,
+        uint256 amount,
+        bytes data
+    );
+
+    // Event for finalizing withdrawal of Ether
+    event FinalizeWithdrawETH(
+        address indexed from,
+        address indexed to,
+        uint256 amount,
+        bytes data
+    );
+
+    // Event for initializing the contract
+    event Initialized(uint8 version);
+
+    // Event for transferring ownership
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+
+    // Event for refunding ERC20 tokens
+    event RefundERC20(address indexed token, address indexed recipient, uint256 amount);
+
+    // Event for refunding Ether
+    event RefundETH(address indexed recipient, uint256 amount);
+
+    // Event for setting default ERC20 gateway
+    event SetDefaultERC20Gateway(address indexed oldDefaultERC20Gateway, address indexed newDefaultERC20Gateway);
+
+    // Event for setting ERC20 gateway
+    event SetERC20Gateway(address indexed token, address indexed oldGateway, address indexed newGateway);
+
+    // Event for setting ETH gateway
+    event SetETHGateway(address indexed oldETHGateway, address indexed newEthGateway);
+
+    // Functions
+
+    // Function to get ERC20 gateway
+    function ERC20Gateway(address) external view returns (address) {}
+
+    // Function to get default ERC20 gateway
+    function defaultERC20Gateway() external view returns (address) {}
+
+    // Function to deposit ERC20 tokens
+    function depositERC20(address _token, uint256 _amount, uint256 _gasLimit) external payable {}
+
+    // Function to deposit ERC20 tokens to a specific address
+    function depositERC20(address _token, address _to, uint256 _amount, uint256 _gasLimit) external payable {}
+
+    // Function to deposit ERC20 tokens and call a function on the recipient
+    function depositERC20AndCall(address _token, address _to, uint256 _amount, bytes calldata _data, uint256 _gasLimit) external payable {}
+
+    // Function to deposit Ether
+    function depositETH(uint256 _amount, uint256 _gasLimit) external payable {}
+
+    // Function to deposit Ether to a specific address
+    function depositETH(address _to, uint256 _amount, uint256 _gasLimit) external payable {}
+
+    // Function to deposit Ether and call a function on the recipient
+    function depositETHAndCall(address _to, uint256 _amount, bytes calldata _data, uint256 _gasLimit) external payable {}
+
+    // Function to get ETH gateway
+    function ethGateway() external view returns (address) {}
+
+    // Function to finalize withdrawal of ERC20 tokens
+    function finalizeWithdrawERC20(address, address, address, address, uint256, bytes calldata) external payable {}
+
+    // Function to finalize withdrawal of Ether
+    function finalizeWithdrawETH(address, address, uint256, bytes calldata) external payable {}
+
+    // Function to get gateway in context
+    function gatewayInContext() external view returns (address) {}
+
+    // Function to get ERC20 gateway
+    function getERC20Gateway(address _token) external view returns (address) {}
+
+    // Function to get L2 ERC20 address
+    function getL2ERC20Address(address _l1Address) external view returns (address) {}
+
+    // Function to initialize the contract
+    function initialize(address _ethGateway, address _defaultERC20Gateway) external {}
+
+    // Function to get owner
+    function owner() external view returns (address) {}
+
+    // Function to renounce ownership
+    function renounceOwnership() external {}
+
+    // Function to request ERC20 tokens
+    function requestERC20(address _sender, address _token, uint256 _amount) external returns (uint256) {}
+
+    // Function to set default ERC20 gateway
+    function setDefaultERC20Gateway(address _newDefaultERC20Gateway) external {}
+
+    // Function to set ERC20 gateway
+    function setERC20Gateway(address[] calldata _tokens, address[] calldata _gateways) external {}
+
+    // Function to set ETH gateway
+    function setETHGateway(address _newEthGateway) external {}
+
+    // Function to transfer ownership
+    function transferOwnership(address newOwner) external {}
+}
